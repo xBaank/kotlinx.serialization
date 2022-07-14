@@ -244,12 +244,11 @@ class SerializersLookupTest : JsonTestBase() {
         }
     }
 
-// TODO uncomment when Kotlin 1.7.20 is released
-//    @Test
-//    fun testLookupDuration() = noLegacyJs {
-//        assertNotNull(serializerOrNull(typeOf<Duration>()))
-//        assertSame(Duration.serializer(), serializer<Duration>())
-//    }
+    @Test
+    fun testDurationLookup() = noLegacyJs {
+        assertNotNull(serializerOrNull(typeOf<Duration>()))
+        assertSame(Duration.serializer(), serializer<Duration>())
+    }
 
     private inline fun <reified T> assertSerializedWithType(
         expected: String,
