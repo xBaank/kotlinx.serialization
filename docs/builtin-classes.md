@@ -386,7 +386,7 @@ which is explained in the [Polymorphism. Objects](polymorphism.md#objects) secti
 
 By default, [Nothing] is a serializable class. However, since there are no instances of this class, it is impossible to encode or decode its values - any attempt will cause an exception.
 
-This serializer is used when syntactically is needed some type, but it is not actually used in serialization. For example, when using parameterized classes:
+This serializer is used when syntactically some type is needed, but it is not actually used in serialization. For example, when using parameterized polymorphic base classes:
 ```kotlin
 @Serializable
 sealed class ParametrizedParent<out R> {
