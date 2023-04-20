@@ -16,7 +16,7 @@ import kotlinx.serialization.json.okio.internal.OkioSerialReader
 import okio.*
 
 /**
- * Serializes the [value] with [serializer] into a [sink] using JSON format and UTF-8 encoding.
+ * Serializes the [value] with [serializer] into a [target] using JSON format and UTF-8 encoding.
  *
  * @throws [SerializationException] if the given value cannot be serialized to JSON.
  * @throws [okio.IOException] If an I/O error occurs and sink can't be written to.
@@ -25,9 +25,9 @@ import okio.*
 public fun <T> Json.encodeToBufferedSink(
     serializer: SerializationStrategy<T>,
     value: T,
-    sink: BufferedSink
+    target: BufferedSink
 ) {
-    val writer = JsonToOkioStreamWriter(sink)
+    val writer = JsonToOkioStreamWriter(target)
     try {
         encodeByWriter(writer, serializer, value)
     } finally {
@@ -36,7 +36,7 @@ public fun <T> Json.encodeToBufferedSink(
 }
 
 /**
- * Serializes given [value] to a [sink] using UTF-8 encoding and serializer retrieved from the reified type parameter.
+ * Serializes given [value] to a [target] using UTF-8 encoding and serializer retrieved from the reified type parameter.
  *
  * @throws [SerializationException] if the given value cannot be serialized to JSON.
  * @throws [okio.IOException] If an I/O error occurs and sink can't be written to.
@@ -44,8 +44,8 @@ public fun <T> Json.encodeToBufferedSink(
 @ExperimentalSerializationApi
 public inline fun <reified T> Json.encodeToBufferedSink(
     value: T,
-    sink: BufferedSink
-): Unit = encodeToBufferedSink(serializersModule.serializer(), value, sink)
+    target: BufferedSink
+): Unit = encodeToBufferedSink(serializersModule.serializer(), value, target)
 
 
 /**
