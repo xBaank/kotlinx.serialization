@@ -4,19 +4,18 @@ import kotlinx.serialization.test.*
 import kotlin.reflect.KClass
 import kotlin.test.*
 
-@MetaSerializable
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
-annotation class MySerializable
-
-@MetaSerializable
-@Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
-annotation class MySerializableWithInfo(
-    val value: Int,
-    val kclass: KClass<*>
-)
-
-
 class MetaSerializableTest {
+
+    @MetaSerializable
+    @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
+    annotation class MySerializable
+
+    @MetaSerializable
+    @Target(AnnotationTarget.CLASS, AnnotationTarget.PROPERTY)
+    annotation class MySerializableWithInfo(
+        val value: Int,
+        val kclass: KClass<*>
+    )
 
     @MySerializable
     class Project1(val name: String, val language: String)
