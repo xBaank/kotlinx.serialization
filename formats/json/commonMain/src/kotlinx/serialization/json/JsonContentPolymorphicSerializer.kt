@@ -55,12 +55,11 @@ import kotlin.reflect.*
  *
  * // Now both statements will yield different subclasses of Payment:
  *
- * Json.decodeFromString(PaymentSerializer, """{"amount":"1.0","date":"03.02.2020"}""")
- * Json.decodeFromString(PaymentSerializer, """{"amount":"2.0","date":"03.02.2020","reason":"complaint"}""")
+ * Json.parse(PaymentSerializer, """{"amount":"1.0","date":"03.02.2020"}""")
+ * Json.parse(PaymentSerializer, """{"amount":"2.0","date":"03.02.2020","reason":"complaint"}""")
  * ```
  *
- * @param T A root type for all classes that could be possibly encountered during serialization and deserialization.
- * Must be non-final class or interface.
+ * @param T A root class for all classes that could be possibly encountered during serialization and deserialization.
  * @param baseClass A class token for [T].
  */
 @OptIn(ExperimentalSerializationApi::class)
