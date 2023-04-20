@@ -165,14 +165,9 @@ private sealed class AbstractJsonTreeDecoder(
     override fun decodeTaggedInline(tag: String, inlineDescriptor: SerialDescriptor): Decoder =
         if (inlineDescriptor.isUnsignedNumber) JsonDecoderForUnsignedTypes(StringJsonLexer(getPrimitiveValue(tag).content), json)
         else super.decodeTaggedInline(tag, inlineDescriptor)
-
-    override fun decodeInline(descriptor: SerialDescriptor): Decoder {
-        return if (currentTagOrNull != null) super.decodeInline(descriptor)
-        else JsonPrimitiveDecoder(json, value).decodeInline(descriptor)
-    }
 }
 
-private class JsonPrimitiveDecoder(json: Json, override val value: JsonElement) : AbstractJsonTreeDecoder(json, value) {
+private class JsonPrimitiveDecoder(json: Json, override val value: JsonPrimitive) : AbstractJsonTreeDecoder(json, value) {
 
     init {
         pushTag(PRIMITIVE_TAG)
