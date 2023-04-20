@@ -17,12 +17,9 @@ import kotlin.reflect.KTypeProjection
  * but ClassValue is not available on Android, thus we attempt to check it dynamically
  * and fallback to ConcurrentHashMap-based cache.
  */
-private val useClassValue = try {
+private val useClassValue = runCatching {
     Class.forName("java.lang.ClassValue")
-    true
-} catch (_: Throwable) {
-    false
-}
+}.map { true }.getOrDefault(false)
 
 /**
  * Creates a **strongly referenced** cache of values associated with [Class].
